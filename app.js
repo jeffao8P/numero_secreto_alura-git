@@ -1,7 +1,7 @@
 function exibirTextoNaTela(tag, texto) {
     let campo = document.querySelector(tag);
     campo.innerHTML = texto;
-     if ('speechSynthesis' in window) {
+    if ('speechSynthesis' in window) {
         let utterance = new SpeechSynthesisUtterance(texto);
         utterance.lang = 'pt-BR'; 
         utterance.rate = 1.6;
@@ -11,9 +11,18 @@ function exibirTextoNaTela(tag, texto) {
     }
 }
 
+function exibirChute(chute) {
+    chutes.push(chute);
+    const historico = document.getElementById('historico-chutes');
+    historico.textContent = 'Chutes: ' + chutes.join(' - ');
+
+}
+
 function verificarChute() {
     let chute = document.querySelector('input').value;
     console.log(`chute ${tentativas}: ${chute}`);
+    
+    exibirChute(chute);
 
     if (chute == numeroSecreto) {
         exibirTextoNaTela('h1', 'Acertou!');
@@ -23,9 +32,9 @@ function verificarChute() {
         document.getElementById('reiniciar').removeAttribute('disabled');
     } else {
         if (chute > numeroSecreto) {
-            exibirTextoNaTela('p', 'O número secreto é menor.');
+            exibirTextoNaTela('p', `O número secreto é menor.`);
         } else {
-            exibirTextoNaTela('p', 'O número secreto é maior.');
+            exibirTextoNaTela('p', `O número secreto é maior.`);
         }
         tentativas++;
         limparCampo();
@@ -68,6 +77,7 @@ function exibirMensagemInicial() {
 
 let nMax = 10000;
 let numerosSorteados = [];
+let chutes = [];
 let numeroSecreto = gerarNumeroAleatorio();
 let tentativas = 1;
 console.log(numeroSecreto);
