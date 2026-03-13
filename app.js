@@ -66,7 +66,7 @@ function exibirMensagemInicial() {
     exibirTextoNaTela('p', `Escolha um número entre 1 e ${nMax}`);
 }
 
-let nMax = 1000;
+let nMax = 10000;
 let numerosSorteados = [];
 let numeroSecreto = gerarNumeroAleatorio();
 let tentativas = 1;
